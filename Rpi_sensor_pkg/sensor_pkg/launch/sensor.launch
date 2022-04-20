@@ -1,0 +1,19 @@
+<launch>
+
+  <group ns="robot1">
+  <!-- IMU senosr launch -->
+  <include file="$(find mpu6050)/launch/mpu6050.launch"/>
+
+  <!-- Rosserial node -->
+  <node pkg="rosserial_python" name="serial_node" type="serial_node.py" >
+    <param name="port" value="/dev/ttyUSB1"/>
+  </node>
+
+  <!-- Odom publisher node -->
+  <node pkg="sdr_odom_publisher" name="sdr_odom_publisher_node" type="sdr_odom_publisher_node_success" />
+
+  <!-- YDlidar launch  -->
+  <include file="$(find ydlidar_ros)/launch/lidar.launch"/>
+
+  </group>
+</launch>
